@@ -1,0 +1,11 @@
+FROM nginx:1.21.3-alpine
+
+RUN apk upgrade --update-cache --available
+
+COPY nginx.conf.auth /etc/nginx/nginx.conf
+
+COPY .htpasswd /etc/nginx/.htpasswd
+
+STOPSIGNAL SIGTERM
+
+CMD ["nginx", "-g", "daemon off;"]
